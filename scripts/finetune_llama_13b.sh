@@ -1,0 +1,21 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python finetune_llama.py \
+    --base_model 'huggyllama/llama-13b' \
+    --data_path 'tatsu-lab/alpaca' \
+    --output_dir './results/lora-alpaca-13b' \
+    --batch_size 16 \
+    --micro_batch_size 16 \
+    --num_epochs 3 \
+    --learning_rate 4e-4 \
+    --cutoff_len 512 \
+    --val_set_size 1024 \
+    --lora_r 64 \
+    --lora_alpha 16 \
+    --lora_dropout 0.1 \
+    --lora_target_modules '[down_proj,up_proj,gate_proj,q_proj,k_proj,v_proj,o_proj]' \
+    --train_on_inputs \
+    --group_by_length \
+    --velora_r 1 \
+    --velora_layers 'vd' \
+    --num_groups 32 \
+    --init_type 'batch_average_once' \
+    --velora_scale 0.1
